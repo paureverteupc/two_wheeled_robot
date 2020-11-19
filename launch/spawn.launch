@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <include file = "$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name = "paused" value="false"/>
+    <arg name = "use_sim_time" value="true"/>
+    <arg name = "gui" value="true"/>
+    <arg name = "recording" value="false"/>
+    <arg name = "debug" value="false"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find two_wheeled_robot)/urdf/2wr.xacro"/>
+
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0.5"/>
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen"
+    args="-urdf -param robot_description -model 2wr -x $(arg x) -y $(arg y) -z $(arg z)" />
+</launch>
