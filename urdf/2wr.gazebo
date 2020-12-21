@@ -4,13 +4,37 @@
     <material>Gazebo/Orange</material>
   </gazebo>
   <gazebo reference="link_left_wheel">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/Black</material>
   </gazebo>
   <gazebo reference="link_right_wheel">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="link_left_wheel_front">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="link_right_wheel_front">
+    <material>Gazebo/Black</material>
   </gazebo>
 
-  <gazebo>
+
+    <gazebo>
+      <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+        <updateRate>100.0</updateRate>
+        <robotNamespace>/</robotNamespace>
+        <leftFrontJoint>joint_left_wheel_front</leftFrontJoint>
+        <rightFrontJoint>joint_right_wheel_front</rightFrontJoint>
+        <leftRearJoint>joint_left_wheel</leftRearJoint>
+        <rightRearJoint>joint_right_wheel</rightRearJoint>
+        <wheelSeparation>0.2</wheelSeparation>
+        <wheelDiameter>0.2</wheelDiameter>
+        <robotBaseFrame>link_chassis</robotBaseFrame>
+        <torque>20</torque>
+        <topicName>cmd_vel</topicName>
+        <broadcastTF>true</broadcastTF>
+      </plugin>
+    </gazebo>
+
+  <!-- <gazebo>
     <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
       <legacyMode>false</legacyMode>
       <alwaysOn>true</alwaysOn>
@@ -25,7 +49,7 @@
       <odometryFrame>odom</odometryFrame>
       <robotBaseFrame>link_chassis</robotBaseFrame>
     </plugin>
-  </gazebo>
+  </gazebo> -->
 
   <gazebo reference="sensor_laser">
     <sensor type="ray" name="head_hokuyo_sensor">
